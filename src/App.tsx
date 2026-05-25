@@ -1,6 +1,7 @@
 
 import { useGitHubData } from './hooks/useGitHubData';
 import { FeaturedSection } from './components/FeaturedSection';
+import { PhysicalDesignSection } from './components/PhysicalDesignSection';
 import { Mail, Terminal, Loader2 } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
@@ -50,6 +51,8 @@ function App() {
 
       {/* Main Content */}
       <main className="px-6 sm:px-12 max-w-7xl mx-auto pb-24">
+        <PhysicalDesignSection />
+
         {loading ? (
           <div className="flex flex-col items-center justify-center py-24 text-cyan-500">
             <Loader2 className="animate-spin mb-4" size={48} />
