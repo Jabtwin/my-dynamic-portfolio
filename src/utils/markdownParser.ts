@@ -2,33 +2,33 @@ export const extractFirstImage = (markdown: string, repoName: string, branch: st
   if (!markdown) return null;
 
   // Regex to match standard Markdown image syntax: ![alt](url)
-  const mdImageRegex = /!\[.*?\]\((.*?)\)/;
-  const mdMatch = markdown.match(mdImageRegex);
+  const mdImageRegex = /!\[.*?\]\((.*?)\)/g;
+  const mdMatches = Array.from(markdown.matchAll(mdImageRegex));
   
-  let url: string | null = null;
-  
-  if (mdMatch && mdMatch[1]) {
-    url = mdMatch[1];
-  } else {
-    // Regex to match standard HTML image syntax: <img src="url" ... />
-    const htmlImageRegex = /<img[^>]+src="([^">]+)"/;
-    const htmlMatch = markdown.match(htmlImageRegex);
-    if (htmlMatch && htmlMatch[1]) {
-      url = htmlMatch[1];
+  for (const match of mdMatches) {
+    const url = match[1];
+    if (url && !url.includes('badge') && !url.includes('shield')) {
+      if (!url.startsWith('http')) {
+        const cleanUrl = url.replace(/^\.?\//, '');
+        return `https://raw.githubusercontent.com/Jabtwin/${repoName}/${branch}/${cleanUrl}`;
+      }
+      return url;
     }
   }
 
-  if (url) {
-    if (url.includes('badge') || url.includes('shield')) {
-      return null;
+  // Regex to match standard HTML image syntax: <img src="url" ... />
+  const htmlImageRegex = /<img[^>]+src="([^">]+)"/g;
+  const htmlMatches = Array.from(markdown.matchAll(htmlImageRegex));
+  
+  for (const match of htmlMatches) {
+    const url = match[1];
+    if (url && !url.includes('badge') && !url.includes('shield')) {
+      if (!url.startsWith('http')) {
+        const cleanUrl = url.replace(/^\.?\//, '');
+        return `https://raw.githubusercontent.com/Jabtwin/${repoName}/${branch}/${cleanUrl}`;
+      }
+      return url;
     }
-    
-    if (!url.startsWith('http')) {
-      const cleanUrl = url.replace(/^\.?\//, '');
-      return `https://raw.githubusercontent.com/Jabtwin/${repoName}/${branch}/${cleanUrl}`;
-    }
-    
-    return url;
   }
 
   return null;
