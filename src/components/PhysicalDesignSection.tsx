@@ -11,7 +11,12 @@ export const PhysicalDesignSection: React.FC = () => {
         <h2 className="text-3xl font-bold text-slate-100">Domain 1: Physical Design</h2>
       </div>
 
-      <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 hover:shadow-[0_0_30px_-5px_rgba(168,85,247,0.15)] transition-all">
+      <a 
+        href="https://drive.google.com/file/d/1ZtW2YaIl6AXefkJau8HxfBYSpRmkHQOr/view?usp=sharing" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="block bg-slate-900/50 border border-slate-800 rounded-2xl p-8 hover:shadow-[0_0_30px_-5px_rgba(168,85,247,0.15)] transition-all cursor-pointer"
+      >
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 pb-6 border-b border-slate-800">
           <div>
             <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 to-purple-500 mb-2">
@@ -70,7 +75,7 @@ export const PhysicalDesignSection: React.FC = () => {
             </ul>
           </div>
         </div>
-      </div>
+      </a>
     </section>
   );
 };
