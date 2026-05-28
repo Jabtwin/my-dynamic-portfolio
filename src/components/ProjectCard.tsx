@@ -22,7 +22,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ repo, featured = false
   return (
     <div className={`group relative flex flex-col rounded-2xl bg-slate-900/50 border border-slate-800/50 overflow-hidden hover:border-cyan-500/50 transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(6,182,212,0.3)] hover:-translate-y-1 ${featured ? 'md:flex-row md:col-span-2' : ''}`}>
       {/* Thumbnail */}
-      <div className={`relative ${featured ? 'md:w-2/5' : 'w-full'} aspect-video overflow-hidden border-b md:border-b-0 md:border-r border-slate-800/50`}>
+      <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className={`relative block ${featured ? 'md:w-2/5' : 'w-full'} aspect-video overflow-hidden border-b md:border-b-0 md:border-r border-slate-800/50`}>
         {repo.thumbnailUrl ? (
           <img 
             src={repo.thumbnailUrl} 
@@ -37,14 +37,16 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ repo, featured = false
           </div>
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80" />
-      </div>
+      </a>
 
       {/* Content */}
       <div className={`flex flex-col flex-1 p-6 ${featured ? 'justify-center' : ''}`}>
         <div className="flex justify-between items-start mb-4">
-          <h3 className="text-xl font-bold text-slate-100 group-hover:text-cyan-400 transition-colors">
-            {repo.name}
-          </h3>
+          <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
+            <h3 className="text-xl font-bold text-slate-100 group-hover:text-cyan-400 transition-colors">
+              {repo.name}
+            </h3>
+          </a>
           <div className="flex gap-3 text-slate-400 text-sm">
             <span className="flex items-center gap-1"><Star size={14} /> {repo.stargazers_count}</span>
             <span className="flex items-center gap-1"><GitFork size={14} /> {repo.forks_count}</span>
